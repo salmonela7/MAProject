@@ -16,7 +16,8 @@ namespace MAProject
             Console.WriteLine("1. Apskaičiuoti liekamąjį narį");
             Console.WriteLine("2. Pasirinkti kitą funkciją");
             Console.WriteLine("3. Gauti pasirinktos funkcijos n-tos eilės išvestinę");
-            Console.WriteLine("4. Baigti programą");
+            Console.WriteLine("4. Gauti pasirinktos funkcijos n-tos Teiloro(Makloreno) formulę");
+            Console.WriteLine("5. Baigti programą");
             Console.WriteLine("====================================================");
             Console.WriteLine();
 
@@ -30,15 +31,15 @@ namespace MAProject
                 var order = int.Parse(Console.ReadLine());
                 Console.WriteLine();
 
-                Console.Write("X intervalas (nuo): ");
-                var min = double.Parse(Console.ReadLine());
+                Console.Write("X reiksme: ");
+                var value = double.Parse(Console.ReadLine());
                 Console.WriteLine();
 
-                Console.Write("X intervalas (iki): ");
-                var max = double.Parse(Console.ReadLine());
+                Console.WriteLine($"{order} eilės Teiloro(Makloreno) formulė: " + LagrangeRemainderCalculator.GetTaylorExpression(order + 1, Expr.Variable("x"), 0, _parsedFunction).ToString() + $" + r{order}(x)");
                 Console.WriteLine();
 
-                Console.WriteLine("Funkcijos liekamasis narys: " + LagrangeRemainderCalculator.CalculateLagrangeRemainder(_parsedFunction, "x", order, min, max));
+                Console.WriteLine("Funkcijos liekamasis narys (Lagranzo forma): " + LagrangeRemainderCalculator.CalculateLagrangeRemainder(_parsedFunction, "x", order, 0, value));
+                Console.WriteLine("Tikslus funkcijos liekamasis narys: " + LagrangeRemainderCalculator.CalculateExactRemainder(_parsedFunction, value, order));
                 Console.WriteLine();
                 goto Choices;
             }
@@ -56,7 +57,17 @@ namespace MAProject
                 Console.WriteLine();
                 goto Choices;
             }
-            else if (choice != "1" && choice != "2" && choice != "3" && choice != "4")
+            else if (choice == "4")
+            {
+                Console.Write("Įveskite norimą Teiloro(Makloreno) formulės eilę: ");
+                var order = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                Console.WriteLine($"{order} eilės Teiloro(Makloreno) formulė: " + LagrangeRemainderCalculator.GetTaylorExpression(order + 1, Expr.Variable("x"), 0, _parsedFunction).ToString() + $" + r{order}(x)");
+                Console.WriteLine();
+                goto Choices;
+            }
+            else if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5")
             {
                 Console.WriteLine("Pasirinkimas neatpažintas...");
                 Console.WriteLine();
