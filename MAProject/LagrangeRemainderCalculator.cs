@@ -10,7 +10,6 @@ namespace MAProject
     {
         public static double CalculateLagrangeRemainder(Expr function, string variableName, int n, FloatingPoint x, FloatingPoint x0)
         {
-            Console.WriteLine("Max: " + Math.Max(x.RealValue, x0.RealValue));
             var variable = new Dictionary<string, FloatingPoint>
             {
                 { variableName, Math.Max(x.RealValue, x0.RealValue) }
